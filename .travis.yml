@@ -1,0 +1,30 @@
+language: c
+sudo: false
+
+# Blacklist
+branches:
+  except:
+    - gh-pages
+
+env:
+  global:
+     - PRETTYNAME="Rubber Band Cannon Arduino Code"
+
+before_install:
+   - source $TRAVIS_BUILD_DIR/setup_travis_env.sh
+
+install:
+# https://github.com/arduino/Arduino/blob/master/build/shared/manpage.adoc
+   - arduino --install-library "AltSoftSerial","MemoryUsage","Stepper"
+
+script:
+   - build_main_platforms
+
+# Generate and deploy documentation
+after_success:
+   - echo "todo: get automatic documentation generation working"
+#  - echo TRAVIS_BUILD_DIR is ${TRAVIS_BUILD_DIR}
+#  - export DOXYFILE=${TRAVIS_BUILD_DIR}/Doxyfile
+#  - source <(curl -SLs  https://raw.githubusercontent.com/adafruit/travis-ci-arduino/master/library_check.sh)
+#  - source $TRAVIS_BUILD_DIR/doxy_gen_and_deploy.sh
+#  - source <(curl -SLs  https://raw.githubusercontent.com/adafruit/travis-ci-arduino/master/doxy_gen_and_deploy.sh)
