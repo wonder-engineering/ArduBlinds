@@ -16,9 +16,13 @@ before_install:
 install:
 # https://github.com/arduino/Arduino/blob/master/build/shared/manpage.adoc
    - arduino --install-library "AltSoftSerial","MemoryUsage","Stepper"
+# Install cpplint for style check
+   - /usr/bin/python -m pip install --user cpplint
 
 script:
    - build_main_platforms
+# do a linting pass
+   - ./run_lint.bash
 
 # Generate and deploy documentation
 after_success:
